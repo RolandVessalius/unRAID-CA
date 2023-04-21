@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>FastAPI-DLS</Name>
+  <Repository>collinwebdesigns/fastapi-dls</Repository>
+  <Registry>https://hub.docker.com/r/collinwebdesigns/fastapi-dls/</Registry>
+  <Network>none</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://git.collinwebdesigns.de/oscar.krause/fastapi-dls</Support>
+  <Project>https://hub.docker.com/r/collinwebdesigns/fastapi-dls/</Project>
+  <Overview>Minimal Delegated License Service (DLS).&#xD;
+Compatibility tested with official DLS 2.0.1.&#xD;
+This service can be used without internet connection.&#xD;
+Only the clients need a connection to this service on configured port.&#xD;
+&#xD;
+Important:&#xD;
+Fixed IP address Required (DO NOT USE BRIDGE OR HOST)&#xD;
+DLS URL Required (https://xx.xx.xx.xx)&#xD;
+Timezone Required (America/Los_Angeles)</Overview>
+  <Category>Tools:</Category>
+  <WebUI>https://[IP]:[PORT:443]/-/client-token</WebUI>
+  <TemplateURL/>
+  <Icon>https://git.collinwebdesigns.de/uploads/-/system/project/avatar/106/png-transparent-nvidia-grid-logo-business-nvidia-electronics-text-trademark.png?width=64</Icon>
+  <ExtraParams>--restart always</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1681972519</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires># Run This Command Below After Installing This Docker By Clicking. Start This Docker Again And You Are All Set!&#xD;
+WORKING_DIR=/mnt/user/appdata/fastapi-dls/cert&#xD;
+mkdir -p $WORKING_DIR&#xD;
+cd $WORKING_DIR&#xD;
+openssl genrsa -out $WORKING_DIR/instance.private.pem 2048 &#xD;
+openssl rsa -in $WORKING_DIR/instance.private.pem -outform PEM -pubout -out $WORKING_DIR/instance.public.pem&#xD;
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout  $WORKING_DIR/webserver.key -out $WORKING_DIR/webserver.crt</Requires>
+  <Config Name="AppData" Target="/app/cert" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/fastapi-dls/cert</Config>
+  <Config Name="DLS URL" Target="DLS_URL" Default="" Mode="" Description="E.g.: https://your.fixed.ip.address or https://example.com" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="DLS PORT" Target="DLS_PORT" Default="443" Mode="" Description="E.g.: 443" Type="Variable" Display="always" Required="true" Mask="false">443</Config>
+  <Config Name="Timezone" Target="TZ" Default="" Mode="" Description="E.g.:America/Los_Angeles" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Lease" Target="Lease" Default="90" Mode="" Description="90 days is the maximum value." Type="Variable" Display="always" Required="true" Mask="false">90</Config>
+</Container>
